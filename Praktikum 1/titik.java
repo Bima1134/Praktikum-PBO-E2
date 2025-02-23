@@ -1,47 +1,108 @@
-public class titik {
-    // atribut
+/* Nama File : Titik.java
+ * Deskripsi : Berisi atribut dan method dalam class
+ * Pembuat : Bima Aditya Aryono
+ * Tanggal : 20-02-2025
+ */
+import java.lang.Math; 
 
-    // objek
+ public class Titik {
+    /* Atribut */
     double absis;
     double ordinat;
+    static int counterTitik=0;
 
-    //class
-    static int counterTitik;
-    // method
-
-    //konstruktor
-    titik(double absis, double ordinat){  // konstruktor mendefine absis dan ordinat
+    /* method */
+    // Konstruktor untuk membuat titik (absis,ordinat)
+    Titik(double absis, double ordinat){
+        this.absis = absis;
+        this.ordinat = ordinat;
         counterTitik++;
-        this.absis=absis;
-        this.ordinat=ordinat;
+    }
+    // Konstruktor untuk membuat titik (0,0)
+    Titik(){
+        this(0,0);
     }
 
-    titik(){ // konstruktor di titik 90,0)
-        counterTitik++;
-        absis=0;
-        ordinat=0;
-    }
-    // mutator / setter objek
-    void setAbsis(double a){ // set absis dengan input
-        absis=a;
+    // Mengembalikan nilai counterTitik()
+    static int getCounterTitik(){
+        return counterTitik;
     }
 
-    void setOrdinat(double a){ // set ordinat dengan input
-        ordinat=a;
-    }
-
-    // selektor/getter objek
-    double getAbsis(){ // mendapatkan nilai absis dan dikembalikan dengan nilai real
+    // Getter
+    // Mengembalikan Nilai Absis
+    double getAbsis(){
         return absis;
     }
 
-    double getOrdinat(){ // mendapatkan nilai ordinat dan dikembalikan dengan nilai real
+    // Mengembalikan nilai Ordinat
+    double getOrdinat(){
         return ordinat;
     }
 
-    // selektor class 
-
-    static int getCounterTitik(){ // method class mendapatkan jumlah titik
-        return counterTitik;
+    // Setter
+    // Mengset absis titik dengan nilai baru x
+    void setAbsis(double x){
+        this.absis = x;
     }
-}
+
+    // Mengset ordinat titik dengan nilai baru y
+    void setOrdinat(double y){
+        this.ordinat= y;
+    }
+
+    void geser(double x, double y){
+        this.absis = absis + x;
+        this.ordinat = ordinat + y;
+    }
+
+    // Mencetak koordinat titik
+    void printTitik(){
+        System.out.println("Titik (" + this.absis + "," + this.ordinat + ")");
+    }
+
+    void printCounterTitik(){
+        System.out.println(counterTitik);
+    }
+
+    int getKuadran(){
+        if (this.absis == 0  && this.ordinat == 0){
+            return 0;
+        }
+        else if (this.absis > 0 && this.ordinat >0){
+            return 1;
+        } 
+        else if(this.absis < 0 && this.ordinat > 0){
+            return 2;
+        }
+        else if(this.absis <0 && this.ordinat < 0){
+            return 3;
+        }
+        else{
+            return 4;
+        }
+    }
+
+    double getJarakPusat(){
+        return Math.sqrt((absis * absis) + (ordinat * ordinat));
+    }
+
+    double getJarak(Titik T){
+        return Math.sqrt(((this.absis-T.absis)* (this.absis-T.absis))+((this.ordinat-T.ordinat)*(this.ordinat-T.ordinat)));
+    }
+
+    void refleksiX(){
+        ordinat = -ordinat;
+    }
+
+    void refleksiY(){
+        absis = -absis;
+    }
+
+    Titik getRefleksiX(){
+        return new Titik(this.absis, - this.ordinat);
+    }
+
+    Titik getRefleksiY(){
+        return new Titik(- this.absis, this.ordinat);
+    }
+} 
