@@ -7,8 +7,8 @@ import java.lang.Math;
 
  public class Titik {
     /* Atribut */
-    double absis;
-    double ordinat;
+    private double absis;
+    private double ordinat;
     static int counterTitik=0;
 
     /* method */
